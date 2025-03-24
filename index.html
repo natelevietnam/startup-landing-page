@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>GameSpark | Discover Indie Games</title> <style> body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #ffffff; }
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>IndieFunded | Discover Indie Games</title> <style> body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #ffffff; }
 css
 Copy
 Edit
@@ -12,7 +12,7 @@ header {
 header h1 {
   font-size: 2em;
   margin: 0;
-  color: #ff5733;
+  color: #00c4b4;
 }
 
 .hero {
@@ -65,7 +65,7 @@ header h1 {
 
 .game-card h3 {
   margin-top: 0;
-  color: #ff5733;
+  color: #00c4b4;
 }
 
 .game-card p {
@@ -89,7 +89,7 @@ header h1 {
 }
 
 .support-button {
-  background-color: #ff5733;
+  background-color: #00c4b4;
   color: #000;
   font-weight: bold;
 }
@@ -97,6 +97,44 @@ header h1 {
 .learn-button {
   background-color: #333;
   color: #fff;
+}
+
+.submit-section {
+  background: #121212;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submit-section h3 {
+  font-size: 1.6em;
+  color: #00c4b4;
+  margin-bottom: 20px;
+}
+
+.submit-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.submit-form input, .submit-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.submit-form button {
+  padding: 12px 20px;
+  background-color: #00c4b4;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 footer {
@@ -113,23 +151,29 @@ footer {
     width: 90%;
   }
 }
-</style> </head> <body> <header> <h1>GameSpark</h1> </header> <section class="hero"> <h2>Discover & Support Indie Games</h2> <p>Explore the next wave of game creators and help fund the games you want to play. Your support sparks the future of gaming.</p> </section> <div class="search-bar"> <input type="text" placeholder="Search games by name, genre, or creator…" /> </div> <section class="game-grid"> <div class="game-card"> <h3>StarForge Echo</h3> <p>A pixel-art space roguelike where you build and battle your own AI fleet. Made by a solo dev in Chile.</p> <div class="card-buttons"> <button class="support-button">Support</button> <button class="learn-button">Learn More</button> </div> </div>
-
-<div class="game-card">
+</style> </head> <body> <header> <h1>IndieFunded</h1> </header> <section class="hero"> <h2>Discover & Support Indie Games</h2> <p>Explore the next wave of game creators and help fund the games you want to play. Your support powers the future of independent gaming.</p> </section> <div class="search-bar"> <input type="text" id="searchInput" placeholder="Search games by name, genre, or creator…" oninput="filterGames()" /> </div> <section class="game-grid" id="gameGrid"> <div class="game-card" data-title="StarForge Echo"> <h3>StarForge Echo</h3> <p>A pixel-art space roguelike where you build and battle your own AI fleet. Made by a solo dev in Chile.</p> <div class="card-buttons"> <a href="https://buy.stripe.com/test_5kA4kRb4z7gdcQY3cd" target="_blank"> <button class="support-button">Donate</button> </a> <button class="learn-button">Learn More</button> </div> </div>
+php-template
+Copy
+Edit
+<div class="game-card" data-title="MeadowQuest">
   <h3>MeadowQuest</h3>
   <p>A cozy farming RPG with dynamic weather, animal friendships, and local co-op. Built by a team of 2.</p>
   <div class="card-buttons">
-    <button class="support-button">Support</button>
+    <a href="https://buy.stripe.com/test_5kA4kRb4z7gdcQY3cd" target="_blank">
+      <button class="support-button">Donate</button>
+    </a>
     <button class="learn-button">Learn More</button>
   </div>
 </div>
 
-<div class="game-card">
+<div class="game-card" data-title="Pulse Arena">
   <h3>Pulse Arena</h3>
   <p>Rhythm meets battle royale. Sync your reflexes and survive the beat in this genre mashup.</p>
   <div class="card-buttons">
-    <button class="support-button">Support</button>
+    <a href="https://buy.stripe.com/test_5kA4kRb4z7gdcQY3cd" target="_blank">
+      <button class="support-button">Donate</button>
+    </a>
     <button class="learn-button">Learn More</button>
   </div>
 </div>
-</section> <footer> © 2025 GameSpark. Supporting independent game creators everywhere. </footer> </body> </html>
+</section> <section class="submit-section"> <h3>Submit Your Game</h3> <form class="submit-form" onsubmit="submitGame(event)"> <input type="text" id="gameName" placeholder="Game Title" required /> <input type="text" id="creatorName" placeholder="Creator Name" required /> <textarea id="gameDescription" rows="4" placeholder="Short game description..." required></textarea> <button type="submit">Submit Game</button> </form> <p id="submissionMessage" style="margin-top: 10px; color: #00c4b4;"></p> </section> <footer> © 2025 IndieFunded. Empowering independent game creators everywhere. </footer> <script> function filterGames() { const input = document.getElementById("searchInput").value.toLowerCase(); const cards = document.querySelectorAll(".game-card"); cards.forEach(card => { const title = card.getAttribute("data-title").toLowerCase(); card.style.display = title.includes(input) ? "block" : "none"; }); } function submitGame(event) { event.preventDefault(); const name = document.getElementById("gameName").value; const creator = document.getElementById("creatorName").value; const desc = document.getElementById("gameDescription").value; // Simulate a successful form submission document.getElementById("submissionMessage").textContent = `Thanks, ${creator}! "${name}" was submitted for review.`; event.target.reset(); } </script> </body> </html>
